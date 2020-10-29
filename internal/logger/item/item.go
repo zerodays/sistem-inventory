@@ -1,7 +1,6 @@
 package item
 
 import (
-	"database/sql"
 	"github.com/zerodays/sistem-inventory/internal/database"
 	"time"
 )
@@ -38,9 +37,9 @@ func ForID(id int) (*Item, error) {
 	return item, nil
 }
 
-func (item *Item) Update(name, description string, datePurchased sql.NullTime, price int) error {
+func (item *Item) Update() error {
 	update := `UPDATE items SET name=$2, description=$3, date_purchased=$4, price=$5 WHERE id=$1 RETURNING *`
-	return database.DB.Get(item, update, item.ID, name, description, datePurchased, price)
+	return database.DB.Get(item, update, item.ID, item.Name, item.Description, item.DatePurchased, item.Price)
 }
 
 func (item *Item) Insert() error {
@@ -51,10 +50,16 @@ func (item *Item) Insert() error {
 	return err
 }
 
+func Delete(id int) error {
+	del := `DELETE FROM items WHERE id=$1`
+	_, err := database.DB.Exec(del, id)
+	return err
+}
+
 func ListItems() ([]Item, error) {
 	var items []Item
 
-	query := `SELECT * FROM items ORDER BY date_purchased`
+	query := `SELECT * FROM items ORDER BY (date_purchased, name)`
 	err := database.DB.Select(&items, query)
 
 	return items, err

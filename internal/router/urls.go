@@ -23,6 +23,8 @@ func apiRoutes() []Route {
 			AuthorizedOnly:    true,
 			CustomContentType: true,
 			GET:               http.HandlerFunc(handle.GetItemHandle),
+			PUT:               http.HandlerFunc(handle.EditItemHandle),
+			DELETE:            http.HandlerFunc(handle.DeleteItemHandle),
 		},
 	}
 }
