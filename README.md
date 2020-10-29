@@ -4,7 +4,7 @@ Inventory microservice for sistem.
 ## Running
 1. Start postgresql database
 ```
-docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v sistem_inventory:/var/lib/postgresql/data -d postgres
+docker run -p 5433:5432 -e POSTGRES_PASSWORD=postgres -v sistem_inventory:/var/lib/postgresql/data -d postgres
 ```
 2. Build the executable
 ```

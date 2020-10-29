@@ -10,6 +10,7 @@ var (
 	Database struct {
 		Host     string `ini:"HOST"`
 		User     string `ini:"USER"`
+		Port     int    `ini:"PORT"`
 		Password string `ini:"PASSWORD"`
 		DbName   string `ini:"DB_NAME"`
 		SslMode  string `ini:"SSL_MODE"`

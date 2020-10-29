@@ -3,6 +3,7 @@ go-bindata
 /conf/
 /tmp
 .idea/
+inventory
 
 # Binaries for programs and plugins
 *.exe
