@@ -44,6 +44,8 @@ func Load() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	err = cfg.Section("microservices").MapTo(&Microservices)
 }
 
 // createDefaultConfig creates default settings file at `path`

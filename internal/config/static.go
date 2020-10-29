@@ -27,5 +27,9 @@ var (
 		MaxBackups int `ini:"MAX_BACKUPS"`
 	}
 
+	Microservices struct {
+		UsersUrl string `ini:"USERS_URL"`
+	}
+
 	WorkDir string
 )

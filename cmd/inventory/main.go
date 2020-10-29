@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/urfave/cli/v2"
+	"github.com/zerodays/sistem-auth/token"
 	"github.com/zerodays/sistem-inventory/internal/cmd"
 	"github.com/zerodays/sistem-inventory/internal/config"
 	"github.com/zerodays/sistem-inventory/internal/database"
@@ -19,6 +20,14 @@ func main() {
 	// Initialize database.
 	database.Init()
 	defer database.Close()
+
+	// Loads RSA public signing key for user authentication
+	err := token.LoadKey(config.Microservices.UsersUrl + "/signing_key")
+
+	if err != nil {
+		logger.Log.Fatal().Err(err).Send()
+		return
+	}
 
 	// Create new CLI app.
 	app := cli.NewApp()
@@ -39,7 +48,7 @@ func main() {
 	}
 
 	// Run the app.
-	err := app.Run(os.Args)
+	err = app.Run(os.Args)
 	if err != nil {
 		logger.Log.Fatal().Err(err).Send()
 	}
