@@ -22,7 +22,7 @@ func main() {
 	defer database.Close()
 
 	// Loads RSA public signing key for user authentication
-	err := token.LoadKey(config.Microservices.UsersUrl + "/signing_key")
+	err := token.LoadKey(config.Microservices.UsersUrl() + "/signing_key")
 
 	if err != nil {
 		logger.Log.Fatal().Err(err).Send()

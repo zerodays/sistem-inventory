@@ -25,3 +25,11 @@ in binary executable using the tool [go-bindata](https://github.com/go-bindata/g
 ```
 make bindata
 ```
+
+Example config change (using environment variables):
+```bash
+# export SISTEM_INVENTORY_{section}_{fieldname}={value}
+export SISTEM_INVENTORY_DATABASE_URL="127.0.0.1"
+# run server again
+./inventory serve
+```
