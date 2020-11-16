@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sistem-inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sistem-inventory
+  template:
+    metadata:
+      labels:
+        app: sistem-inventory
+    spec:
+      containers:
+        - image: zdays/sistem-inventory:2.1
+          name: sistem-inventory
+          env:
+            - name: SISTEM_INVENTORY_DATABASE_HOST
+              value: 123.123.123.123
+            # TODO env
+          ports:
+            - containerPort: 8081
+              name: server
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sistem-inventory
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: sistem-inventory
