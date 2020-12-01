@@ -26,5 +26,12 @@ func apiRoutes() []Route {
 			PUT:               http.HandlerFunc(handle.EditItemHandle),
 			DELETE:            http.HandlerFunc(handle.DeleteItemHandle),
 		},
+		{
+			Name:              "milestone_info",
+			Path:              "/milestone_info",
+			AuthorizedOnly:    false,
+			CustomContentType: true,
+			GET:               http.HandlerFunc(handle.MilestoneInfoHandle),
+		},
 	}
 }
