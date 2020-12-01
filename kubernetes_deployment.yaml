@@ -13,7 +13,7 @@ spec:
         app: sistem-inventory
     spec:
       containers:
-        - image: zdays/sistem-inventory:2.1
+        - image: zdays/sistem-inventory:latest
           name: sistem-inventory
           env:
             - name: SISTEM_INVENTORY_DATABASE_HOST
