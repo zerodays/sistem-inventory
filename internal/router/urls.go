@@ -18,6 +18,13 @@ func apiRoutes() []Route {
 			POST:              http.HandlerFunc(handle.NewItemHandle),
 		},
 		{
+			Name:              "items_for_milestone",
+			Path:              "/items/milestone",
+			AuthorizedOnly:    false,
+			CustomContentType: true,
+			GET:               http.HandlerFunc(handle.ListItemsUnauthorizedHandle),
+		},
+		{
 			Name:              "new_item",
 			Path:              "/items/{id}",
 			AuthorizedOnly:    true,

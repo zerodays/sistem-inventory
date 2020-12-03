@@ -12,6 +12,33 @@ import (
 	"strconv"
 )
 
+// Demo function for milestone, so TA can make a test request without having to use authentication.
+func ListItemsUnauthorizedHandle(w http.ResponseWriter, r *http.Request) {
+	items, err := item.ListItems()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var res []byte
+
+	// TODO to se sigurno da naredit boljse, hocem nekak dobit takle json: "[]" in ne "null" kadar ni userjev
+	if items != nil {
+		res, err = json.Marshal(items)
+	} else {
+		res = []byte("[]")
+	}
+
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	_, _ = w.Write(res)
+}
+
 func ListItemsHandle(w http.ResponseWriter, r *http.Request) {
 	u := middleware.UserFromRequest(r)
 
